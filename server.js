@@ -1,6 +1,28 @@
+// Global ENV variables
+require('dotenv').config();
+const URL = process.env.DATABASE_URL;
+
+// Import dependencies.
 const express = require('express');
 const mongoose = require('mongoose');
 const port = 3000;
+
+// Import project files
+const routes = require('./routes/routes');
+
+
+// db connection
+mongoose.connect(URL);
+const db = mongoose.connection;
+
+db.on('error', (error) => {
+  console.log(error);
+})
+
+db.once('connected', () => {
+  console.log('Database Connected');
+})
+// -----------------------------------
 
 const app = express();
 
