@@ -2,7 +2,7 @@
 require('dotenv').config();
 const URL = process.env.DATABASE_URL;
 
-// Import dependencies.
+// Import dependencies modules.
 const express = require('express');
 const mongoose = require('mongoose');
 const port = 3000;
@@ -23,11 +23,14 @@ db.once('connected', () => {
   console.log('Database Connected');
 })
 // -----------------------------------
-
+// Server behavior
 const app = express();
 
 app.use(express.json());
 
+app.use('/api', routes);
+
 app.listen(port, () => {
     console.log(`Server Started at ${port}`)
 })
+// -----------------------------------
